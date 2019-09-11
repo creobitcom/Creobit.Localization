@@ -16,13 +16,13 @@ namespace Creobit.Localization
             get => _defaultLanguage;
             set
             {
-                if (LocalizationData.Languages.Contains(value))
+                if (SupportedLanguages.Contains(value))
                 {
                     _defaultLanguage = value;
                 }
                 else
                 {
-                    Debug.LogErrorFormat("Language \"{0}\" not found!", value);
+                    throw new ArgumentException("Language not found!", nameof(value));
                 }
             }
         }
@@ -35,16 +35,12 @@ namespace Creobit.Localization
 
         public IEnumerable<string> SupportedLanguages => LocalizationData.Languages;
 
-        public void SetCurrentLanguage(string language, bool isInvakeEvent = true)
+        public void SetCurrentLanguage(string language)
         {
             if (!string.IsNullOrEmpty(language))
             {
                 CurrentLanguage = language;
-
-                if (isInvakeEvent == true)
-                {
-                    LocalizationUpdated?.Invoke(this, EventArgs.Empty);
-                }
+                LocalizationUpdated?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -56,7 +52,7 @@ namespace Creobit.Localization
             {
                 Debug.LogErrorFormat(context, "Key \"{0}\" not found!", key);
             }
-            else if (string.IsNullOrEmpty(result))
+            else if (string.IsNullOrWhiteSpace(result))
             {
                 result = LocalizationData.GetString(key, DefaultLanguage);
             }
@@ -73,7 +69,7 @@ namespace Creobit.Localization
 
         public LocalizationSystem(ILocalizationData localizationData)
         {
-            LocalizationData = localizationData ?? throw new ArgumentNullException("localizationData");
+            LocalizationData = localizationData ?? throw new ArgumentNullException(nameof(localizationData));
             _defaultLanguage = LocalizationData.Languages.First();
             CurrentLanguage = _defaultLanguage;
         }

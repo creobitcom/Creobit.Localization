@@ -13,12 +13,12 @@ namespace Creobit.Localization
             if (_image == null)
             {
                 _image = GetComponent<Image>();
-
-                if (_image == null)
-                {
-                    Debug.LogError("UI.Image component not found!", this);
-                }
             }
+        }
+
+        private void Reset()
+        {
+            _image = GetComponent<Image>();
         }
 
         #endregion
@@ -39,13 +39,13 @@ namespace Creobit.Localization
         }
 
         #endregion
-        #region LocalizerText
+        #region LocalizerImage
+
+        [SerializeField, HideInInspector]
+        private Image _image;
 
         [SerializeField]
-        private Image _image = null;
-
-        [SerializeField]
-        private AssetLoader _assetsLoader = null;
+        private AssetLoader _assetsLoader;
 
         #endregion
     }

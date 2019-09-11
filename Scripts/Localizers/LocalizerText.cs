@@ -13,12 +13,12 @@ namespace Creobit.Localization
             if (_text == null)
             {
                 _text = GetComponent<Text>();
-
-                if (_text == null)
-                {
-                    Debug.LogError("UI.Text component not found!", this);
-                }
             }
+        }
+
+        private void Reset()
+        {
+            _text = GetComponent<Text>();
         }
 
         #endregion
@@ -26,17 +26,14 @@ namespace Creobit.Localization
 
         protected override void UpdateValue(string value)
         {
-            if (_text != null)
-            {
-                _text.text = value;
-            }
+            _text.text = value;
         }
 
         #endregion
         #region LocalizerText
 
-        [SerializeField]
-        private Text _text = null;
+        [SerializeField, HideInInspector]
+        private Text _text;
 
         #endregion
     }
