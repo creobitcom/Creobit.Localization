@@ -48,7 +48,7 @@ namespace Creobit.Localization
         private AudioSource _audioSource = null;
 
         [SerializeField]
-        private AssetsLoader _assetsLoader;
+        private AssetLoader _assetsLoader = null;
 
         #endregion
     }

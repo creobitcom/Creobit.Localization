@@ -1,0 +1,14 @@
+{
+    "name": "Creobit.Localization.Editor",
+    "references": [
+        "GUID:cc0ab85c42e34774a8f3a84a5c79a92c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
