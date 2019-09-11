@@ -12,12 +12,12 @@ namespace Creobit.Localization
             if (_audioSource == null)
             {
                 _audioSource = GetComponent<AudioSource>();
-
-                if (_audioSource == null)
-                {
-                    Debug.LogError("UI.AudioSource component not found!", this);
-                }
             }
+        }
+
+        private void Reset()
+        {
+            _audioSource = GetComponent<AudioSource>();
         }
 
         #endregion
@@ -44,11 +44,11 @@ namespace Creobit.Localization
         #endregion
         #region LocalizerText
 
-        [SerializeField]
-        private AudioSource _audioSource = null;
+        [SerializeField, HideInInspector]
+        private AudioSource _audioSource;
 
         [SerializeField]
-        private AssetLoader _assetsLoader = null;
+        private AssetLoader _assetsLoader;
 
         #endregion
     }

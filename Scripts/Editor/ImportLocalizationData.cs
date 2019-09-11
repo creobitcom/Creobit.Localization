@@ -66,8 +66,8 @@ namespace Creobit.Localization.Editor
 
         public ImportLocalizationData(IEnumerable<ImportLanguage> languages, IEnumerable<ImportSheet> sheets)
         {
-            ImportLanguages = languages ?? throw new ArgumentNullException("languages");
-            Sheets = sheets ?? throw new ArgumentNullException("sheets");
+            ImportLanguages = languages ?? throw new ArgumentNullException(nameof(languages));
+            Sheets = sheets ?? throw new ArgumentNullException(nameof(sheets));
         }
 
         public void OnGui()

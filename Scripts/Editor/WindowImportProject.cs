@@ -23,7 +23,7 @@ namespace Creobit.Localization.Editor
 
         internal static void Open(ILocalizationData targetObj)
         {
-            var target = targetObj ?? throw new ArgumentNullException("targetObj");
+            var target = targetObj ?? throw new ArgumentNullException(nameof(targetObj));
 
             var window = GetWindow(typeof(WindowImportProject)) as WindowImportProject;
             window.titleContent = new GUIContent("Import");

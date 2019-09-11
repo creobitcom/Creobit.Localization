@@ -13,7 +13,7 @@ namespace Creobit.Localization.Editor
         public ImportSheet(string id, IEnumerable<LanguagesKeyValue> groups)
         {
             Id = id;
-            Groups = groups ?? throw new ArgumentNullException("groups");
+            Groups = groups ?? throw new ArgumentNullException(nameof(groups));
             IsUsed = true;
         }
     }

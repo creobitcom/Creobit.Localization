@@ -23,7 +23,7 @@ namespace Creobit.Localization
             get;
         }
 
-        void SetCurrentLanguage(string language, bool isInvakeEvent = true);
+        void SetCurrentLanguage(string language);
 
         string GetString(string key, UnityEngine.Object context = null);
     }
