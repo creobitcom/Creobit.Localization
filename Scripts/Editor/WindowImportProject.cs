@@ -8,7 +8,7 @@ namespace Creobit.Localization.Editor
 {
     public class WindowImportProject : EditorWindow
     {
-        private LocalizationData _data = null;
+        private ILocalizationData _data = null;
         private IBaseParser[] _parserList = null;
         private int _indexCurrentParser = 0;
         private ImportLocalizationData _importData = null;
@@ -21,7 +21,7 @@ namespace Creobit.Localization.Editor
             }
         }
 
-        internal static void Open(LocalizationData targetObj)
+        internal static void Open(ILocalizationData targetObj)
         {
             var target = targetObj ?? throw new ArgumentNullException("targetObj");
 

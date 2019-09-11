@@ -2,10 +2,10 @@
 
 namespace Creobit.Localization
 {
-    [CreateAssetMenu(fileName = "AssetsLoaderResources", menuName = "Creobit/Assets/AssetsLoaderResources")]
-    public sealed class AssetsLoaderResources : AssetsLoader
+    [CreateAssetMenu(fileName = "AssetLoaderResources", menuName = "Creobit/Assets/AssetLoaderResources")]
+    public sealed class AssetLoaderResources : AssetLoader
     {
-        #region AssetsLoader
+        #region AssetLoader
 
         public override T Load<T>(string path)
         {
@@ -15,10 +15,10 @@ namespace Creobit.Localization
         }
 
         #endregion
-        #region AssetsLoaderResources
+        #region AssetLoaderResources
 
         [SerializeField]
-        private string _prefixPath;
+        private string _prefixPath = string.Empty;
 
         #endregion
     }

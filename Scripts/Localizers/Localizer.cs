@@ -7,19 +7,15 @@ namespace Creobit.Localization
     {
         #region MonoBehaviour
 
-        private void OnEnable()
+        private void Start()
         {
             LocalizationSystem.LocalizationUpdated += OnLocalizationUpdated;
+            OnLocalizationUpdated(this, EventArgs.Empty);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             LocalizationSystem.LocalizationUpdated -= OnLocalizationUpdated;
-        }
-
-        void Start()
-        {
-            OnLocalizationUpdated(this, EventArgs.Empty);
         }
 
         #endregion

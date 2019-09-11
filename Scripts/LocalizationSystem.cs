@@ -67,11 +67,11 @@ namespace Creobit.Localization
         #endregion
         #region LocalizationSystem
 
-        private readonly LocalizationData LocalizationData;
+        private readonly ILocalizationData LocalizationData;
 
         private string _defaultLanguage;
 
-        public LocalizationSystem(LocalizationData localizationData)
+        public LocalizationSystem(ILocalizationData localizationData)
         {
             LocalizationData = localizationData ?? throw new ArgumentNullException("localizationData");
             _defaultLanguage = LocalizationData.Languages.First();

@@ -45,7 +45,7 @@ namespace Creobit.Localization
         private Image _image = null;
 
         [SerializeField]
-        private AssetsLoader _assetsLoader;
+        private AssetLoader _assetsLoader = null;
 
         #endregion
     }

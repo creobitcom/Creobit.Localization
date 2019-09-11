@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Creobit.Localization
 {
     [CreateAssetMenu(fileName = "LocalizationData", menuName = "Creobit/Assets/LocalizationData")]
-    public class LocalizationData : ScriptableObject
+    public class LocalizationData : ScriptableObject, ILocalizationData
     {
         #region LocalizationData
 
