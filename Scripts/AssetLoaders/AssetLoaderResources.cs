@@ -2,7 +2,7 @@
 
 namespace Creobit.Localization
 {
-    [CreateAssetMenu(fileName = "AssetLoaderResources", menuName = "Creobit/Assets/AssetLoaderResources")]
+    [CreateAssetMenu(fileName = "AssetLoaderResources", menuName = "Creobit/Localization/AssetLoaderResources")]
     public sealed class AssetLoaderResources : AssetLoader
     {
         #region AssetLoader
