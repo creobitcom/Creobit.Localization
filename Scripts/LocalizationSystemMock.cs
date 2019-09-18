@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Creobit.Localization
 {
-    public sealed class LocalizationSystemMock : ILocalizationSystem
+    public sealed class LocalizationSystemDummy : ILocalizationSystem
     {
         #region ILocalizationSystem
 
@@ -38,8 +39,9 @@ namespace Creobit.Localization
         #endregion
         #region LocalizationSystem
 
-        public LocalizationSystemMock(ILocalizationData localizationData)
+        public LocalizationSystemDummy(ILocalizationData localizationData)
         {
+            Debug.LogWarningFormat("Used [0]!", nameof(LocalizationSystemDummy));
         }
 
         #endregion
