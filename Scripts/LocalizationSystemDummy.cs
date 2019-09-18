@@ -19,16 +19,12 @@ namespace Creobit.Localization
         public string CurrentLanguage
         {
             get;
-            private set;
+            set;
         }
 
         public IEnumerable<string> SupportedLanguages
         {
             get;
-        }
-
-        public void SetCurrentLanguage(string language)
-        {
         }
 
         public string GetString(string key, UnityEngine.Object context = null)
