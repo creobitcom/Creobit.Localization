@@ -64,7 +64,10 @@ namespace Creobit.Localization.Editor
 
                 try
                 {
-                    workbook = Workbook.getWorkbook(fileInfo);
+                    var workbookSettings = new WorkbookSettings();
+                    workbookSettings.setEncoding("UTF-8");
+
+                    workbook = Workbook.getWorkbook(fileInfo, workbookSettings);
                 }
                 catch (Exception ex)
                 {
@@ -94,6 +97,12 @@ namespace Creobit.Localization.Editor
             {
                 var cell = cells[i];
                 var value = cell.getContents();
+
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    value = string.Format("Empty-{0}", i);
+                }
+
                 if (!string.IsNullOrEmpty(value))
                 {
                     var importLanguage = new ImportLanguage(value);
@@ -152,6 +161,9 @@ namespace Creobit.Localization.Editor
                 {
                     continue;
                 }
+
+                char[] charsToTrim = { ' ' };
+                key = key.Trim(charsToTrim);
 
                 var localizationList = new List<string>();
 

@@ -29,20 +29,18 @@ namespace Creobit.Localization
 
         public string CurrentLanguage
         {
-            get;
-            private set;
+            get => _currentLanguage;
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _currentLanguage = value;
+                    LocalizationUpdated?.Invoke(this, EventArgs.Empty);
+                }
+            }
         }
 
         public IEnumerable<string> SupportedLanguages => LocalizationData.Languages;
-
-        public void SetCurrentLanguage(string language)
-        {
-            if (!string.IsNullOrEmpty(language))
-            {
-                CurrentLanguage = language;
-                LocalizationUpdated?.Invoke(this, EventArgs.Empty);
-            }
-        }
 
         public string GetString(string key, UnityEngine.Object context = null)
         {
@@ -66,6 +64,8 @@ namespace Creobit.Localization
         private readonly ILocalizationData LocalizationData;
 
         private string _defaultLanguage;
+
+        private string _currentLanguage;
 
         public LocalizationSystem(ILocalizationData localizationData)
         {

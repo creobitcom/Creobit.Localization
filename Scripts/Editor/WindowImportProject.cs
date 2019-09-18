@@ -86,6 +86,8 @@ namespace Creobit.Localization.Editor
             {
                 _data.SetData(_importData.Languages, _importData.Keys);
                 _importData = null;
+
+                Debug.Log("Successful import");
             }
 
             GUI.enabled = true;
