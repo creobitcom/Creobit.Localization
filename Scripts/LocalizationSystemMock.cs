@@ -41,7 +41,7 @@ namespace Creobit.Localization
 
         public LocalizationSystemDummy(ILocalizationData localizationData)
         {
-            Debug.LogWarningFormat("Used [0]!", nameof(LocalizationSystemDummy));
+            Debug.LogWarningFormat("Used {0}!", nameof(LocalizationSystemDummy));
         }
 
         #endregion
