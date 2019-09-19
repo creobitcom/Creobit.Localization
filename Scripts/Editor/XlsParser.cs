@@ -100,7 +100,7 @@ namespace Creobit.Localization.Editor
 
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    value = string.Format("Empty-{0}", i);
+                    value = string.Format("[Empty-{0}]", i);
                 }
 
                 if (!string.IsNullOrEmpty(value))
@@ -143,6 +143,7 @@ namespace Creobit.Localization.Editor
         private IEnumerable<LanguagesKeyValue> GetGroups(Sheet sheet)
         {
             var result = new List<LanguagesKeyValue>();
+            var cellsLength = sheet.getRow(0).Length;
             var rowCount = sheet.getRows();
 
             for (var i = 1 ; i < rowCount; ++i)
@@ -156,7 +157,7 @@ namespace Creobit.Localization.Editor
 
                 var key = cells[0].getContents();
 
-                if (string.IsNullOrEmpty(key) ||
+                if (string.IsNullOrWhiteSpace(key) ||
                     key.StartsWith("["))
                 {
                     continue;
@@ -167,10 +168,16 @@ namespace Creobit.Localization.Editor
 
                 var localizationList = new List<string>();
 
-                for (var j = 1; j < cells.Length; ++j)
+                for (var j = 1; j < cellsLength; ++j)
                 {
-                    var cell = cells[j];
-                    var value = cell.getContents();
+                    var value = string.Empty;
+
+                    if (cells.Length > j)
+                    {
+                        var cell = cells[j];
+                        value = cell.getContents();
+                    }
+
                     localizationList.Add(value);
                 }
 
