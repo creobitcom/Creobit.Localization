@@ -4,7 +4,7 @@ using TMPro;
 namespace Creobit.Localization
 {
     [DisallowMultipleComponent, RequireComponent(typeof(TextMeshPro))]
-    public sealed class LocalizerTextMethPro : Localizer
+    public sealed class LocalizerTextMeshPro : Localizer
     {
         #region MonoBehaviour
 
