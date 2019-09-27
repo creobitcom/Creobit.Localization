@@ -34,7 +34,10 @@ namespace Creobit.Localization
             {
                 _key = value;
 
-                OnLocalizationUpdated(this, EventArgs.Empty);
+                if (isActiveAndEnabled)
+                {
+                    OnLocalizationUpdated(this, EventArgs.Empty);
+                }
             }
         }
 
