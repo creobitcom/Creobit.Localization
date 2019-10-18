@@ -10,6 +10,7 @@ namespace Creobit.Localization
         private void Start()
         {
             LocalizationSystem.LocalizationUpdated += OnLocalizationUpdated;
+
             OnLocalizationUpdated(this, EventArgs.Empty);
         }
 
@@ -19,26 +20,39 @@ namespace Creobit.Localization
         }
 
         #endregion
-        #region LocalizationBehaviour
+        #region Localizer
 
         public static ILocalizationSystem LocalizationSystem;
 
         [SerializeField]
-        private string _key = string.Empty;
+        private string _key;
 
-        public string Key => _key;
+        public string Key
+        {
+            get => _key;
+            set
+            {
+                _key = value;
 
-        protected abstract void UpdateValue(string _value);
+                if (isActiveAndEnabled)
+                {
+                    OnLocalizationUpdated(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        protected abstract void UpdateValue(string value);
 
         private void OnLocalizationUpdated(object sender, EventArgs eventArgs)
         {
-            if (string.IsNullOrEmpty(Key))
+            if (string.IsNullOrWhiteSpace(_key))
             {
                 Debug.LogError("The localization key is not installed.", this);
             }
             else
             {
-                var value = LocalizationSystem.GetString(Key, this);
+                var value = LocalizationSystem.GetString(_key, this);
+
                 UpdateValue(value);
             }
         }
