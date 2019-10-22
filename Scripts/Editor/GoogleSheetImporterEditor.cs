@@ -1,4 +1,7 @@
-﻿using UnityEditor;
+﻿#if CREOBIT_LOCALIZATION_GOOGLEDOCS
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Creobit.Localization.Editor
@@ -16,16 +19,62 @@ namespace Creobit.Localization.Editor
 
             if (GUILayout.Button("Import"))
             {
-                EditorUtility.DisplayProgressBar("Importing Localization", "Please wait...", 0.5f);
+                if (_importTask == null)
+                {
+                    try
+                    {
+                        var googleSheetImporter = (GoogleSheetImporter)target;
 
-                var googleSheetImporter = (GoogleSheetImporter)target;
+                        _cancellationTokenSource = new CancellationTokenSource();
+                        _importTask = googleSheetImporter.ImportAsync(_cancellationTokenSource.Token);
+                        _progressBar = true;
 
-                await googleSheetImporter.ImportAsync();
+                        await _importTask;
+                    }
+                    finally
+                    {
+                        _cancellationTokenSource.Dispose();
+                        _cancellationTokenSource = null;
+                        _importTask = null;
+                        _progressBar = false;
+                    }
+                }
+            }
 
-                EditorUtility.ClearProgressBar();
+            if (_progressBar.HasValue)
+            {
+                if (_progressBar.Value)
+                {
+                    if (EditorUtility.DisplayCancelableProgressBar("Importing Localization", "Please wait...", 0.5f))
+                    {
+                        if (!_cancellationTokenSource.IsCancellationRequested)
+                        {
+                            _cancellationTokenSource.Cancel();
+                        }
+                    }
+                }
+                else
+                {
+                    _progressBar = null;
+
+                    EditorUtility.ClearProgressBar();
+                }
             }
         }
+
+        public override bool RequiresConstantRepaint()
+        {
+            return true;
+        }
+
+        #endregion
+        #region GoogleSheetImporterEditor
+
+        private CancellationTokenSource _cancellationTokenSource;
+        private Task _importTask;
+        private bool? _progressBar;
 
         #endregion
     }
 }
+#endif

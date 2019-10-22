@@ -1,4 +1,5 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿#if CREOBIT_LOCALIZATION_GOOGLEDOCS
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using System;
@@ -14,6 +15,8 @@ namespace Creobit.Localization.Editor
     [CreateAssetMenu(fileName = "GoogleSheetImporter", menuName = "Creobit/Localization/GoogleSheetImporter")]
     public sealed class GoogleSheetImporter : ScriptableObject
     {
+        #region GoogleSheetImporter
+
         [SerializeField]
         private string _clientId;
 
@@ -32,7 +35,7 @@ namespace Creobit.Localization.Editor
         [SerializeField]
         private LocalizationData _localizationData;
 
-        public async Task ImportAsync()
+        public async Task ImportAsync(CancellationToken cancellationToken)
         {
             var entries = new List<(string Language, string Key, string Value)>();
 
@@ -50,7 +53,7 @@ namespace Creobit.Localization.Editor
                     SheetsService.Scope.SpreadsheetsReadonly
                 };
 
-                var userCredential = await GoogleWebAuthorizationBroker.AuthorizeAsync(clientSecrets, scopes, "user", CancellationToken.None);
+                var userCredential = await GoogleWebAuthorizationBroker.AuthorizeAsync(clientSecrets, scopes, "user", cancellationToken);
                 var clientServiceInitializer = new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = userCredential
@@ -64,7 +67,7 @@ namespace Creobit.Localization.Editor
                     foreach (var sheetName in _sheetNames)
                     {
                         var getRequest = valuesResource.Get(_spreadsheetId, sheetName);
-                        var valueRange = await getRequest.ExecuteAsync();
+                        var valueRange = await getRequest.ExecuteAsync(cancellationToken);
                         var values = valueRange.Values;
 
                         UpdateEntries(values);
@@ -134,5 +137,8 @@ namespace Creobit.Localization.Editor
                 }
             }
         }
+
+        #endregion
     }
 }
+#endif
