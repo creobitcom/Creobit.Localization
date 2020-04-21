@@ -26,7 +26,7 @@ namespace Creobit.Localization
 
         protected override void UpdateValue(string value)
         {
-            _text.text = value;
+            _text.text = _isUpperCase ? value.ToUpper() : value;
         }
 
         #endregion
@@ -34,6 +34,9 @@ namespace Creobit.Localization
 
         [SerializeField, HideInInspector]
         private Text _text;
+
+        [SerializeField]
+        private bool _isUpperCase = false;
 
         #endregion
     }
